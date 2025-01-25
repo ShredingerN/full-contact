@@ -14,11 +14,11 @@ const FormContact = (props) => {
             isValid = false;
         }
         if (!contactPhone) {
-            newErrors.phone = 'Телефон обязательно для заполнения';
+            newErrors.phone = 'Телефон обязателен для заполнения';
             isValid = false;
         }
         if (!contactEmail) {
-            newErrors.email = 'E-mail обязательно для заполнения';
+            newErrors.email = 'E-mail обязателен для заполнения';
             isValid = false;
         }
 
@@ -30,6 +30,9 @@ const FormContact = (props) => {
         if (validate()) {
             props.addContact(contactName, contactPhone, contactEmail);
         }
+        setContactName('');
+        setContactPhone('');
+        setContactEmail('');
     };
 
     return (
