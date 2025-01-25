@@ -1,12 +1,13 @@
-function App() {
+const App = () => {
   return (
-    <div>
-      <div>
-        <div>
+    <div className = "container mt-5" >
+      <div className = "card">
+        <div className = "card-header">
           <hi>Список контактов</hi>
         </div>
-        <div>
-          <table>
+        
+        <div className = "card-body">
+          <table className="table table-hover">
             <thead>
               <tr>
                 <th>№</th>
