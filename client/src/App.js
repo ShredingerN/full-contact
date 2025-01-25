@@ -1,9 +1,14 @@
 import FormContact from "./layout/FormContact/FormContact";
 import TableContact from "./layout/TableContact/TableContact";
 import { useState } from 'react';
+import axios from 'axios';
 
 
 const App = () => {
+  const url = 'http://localhost:5000/api/ContactManagement/contacts'; 
+  axios.get(url).then(
+    res=>console.log(res.data)
+  );
   const [contacts, setContacts] = useState(
     [
       { id: 1, name: 'John Doe', phone: '+1 (123) 456-7890', email: 'john@example.com' },
@@ -14,10 +19,6 @@ const App = () => {
 
   const addContact = (contactName, contactPhone, contactEmail) => {
     const newId = contacts.length > 0 ? Math.max(...contacts.map(e => e.id)) + 1 : 1;
-    // //компаратор
-    // const newId = contacts
-    //   .sort((a, b) => a.id - b.id)[contacts.length - 1]
-    //   .id + 1;
     const item = {
       id: newId,
       name: contactName,
