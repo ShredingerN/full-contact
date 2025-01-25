@@ -9,19 +9,19 @@ const App = () => {
       { id: 1, name: 'John Doe', phone: '+1 (123) 456-7890', email: 'john@example.com' },
       { id: 2, name: 'Jane Doe', phone: '+2 (987) 654-3210', email: 'jane@example.com' },
       { id: 3, name: 'Michael Johnson', phone: '+3 (555) 123-4567', email: 'michael@example.com' },
-      { id: 55, name: 'Sarah Smith', phone: '+4 (999) 888-7777', email: 'sarah@example.com' },
+      { id: 4, name: 'Sarah Smith', phone: '+4 (999) 888-7777', email: 'sarah@example.com' },
     ]);
 
-  const addContact = () => {
+  const addContact = (contactName, contactPhone, contactEmail) => {
     //компаратор
     const newId = contacts
       .sort((a, b) => a.id - b.id)[contacts.length - 1]
       .id + 1;
     const item = {
       id: newId,
-      name: 'New Contact',
-      phone: '+5 (000) 000-0000',
-      email: 'newcontact@example.com',
+      name: contactName,
+      phone: contactPhone,
+      email: contactEmail,
     };
 
     setContacts([...contacts, item]);
