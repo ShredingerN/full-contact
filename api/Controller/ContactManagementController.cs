@@ -9,6 +9,9 @@ public class ContactManagementController : BaseController
         this.contactStorage = contactStorage;
     }
 
+    /// <summary>
+    /// Создать новый контакт
+    /// </summary>
     [HttpPost("contacts")]
     public IActionResult Create([FromBody] Contact contact)
     {
@@ -17,12 +20,18 @@ public class ContactManagementController : BaseController
         return Conflict($"Контакт уже существует");
     }
 
+    /// <summary>
+    /// Получить список контактов
+    /// </summary>
     [HttpGet("contacts")]
     public ActionResult<List<Contact>> GetContacts()
     {
         return Ok(contactStorage.GetContacts());
     }
 
+    /// <summary>
+    /// Получить контакт по идентификатору
+    /// </summary>
     [HttpGet("contacts/{id}")]
     public IActionResult SearchContact(int id)
     {
@@ -36,6 +45,9 @@ public class ContactManagementController : BaseController
         return NotFound($"Контакт {id} не найден");
     }
 
+    /// <summary>
+    /// Редактировать контакт
+    /// </summary>
     [HttpPut("contacts/{id}")]
     public IActionResult UpdateContact([FromBody] ContactDto contactDto, int id)
     {
@@ -44,7 +56,9 @@ public class ContactManagementController : BaseController
         return Conflict($"Контакт {id} не найден");
     }
 
-
+    /// <summary>
+    /// Удалить контакт по идентификатору
+    /// </summary>
     [HttpDelete("contacts/{id}")]
     public IActionResult DeleteContact(int id)
     {
