@@ -1,25 +1,33 @@
 import RowTableContact from "./components/RowTableContact";
 
-const TableContact =()=>{
+
+
+const TableContact = (props) => {
     return (
+
         <table className="table table-hover">
-        <thead>
-          <tr>
-            <th>№</th>
-            <th>Имя контакта</th>
-            <th>Телефон</th>
-            <th>E-mail</th>
-          </tr>
-        </thead>
-        <tbody>
-            <RowTableContact/>
-            <RowTableContact/>
-            <RowTableContact/>
-            <RowTableContact/>
-            <RowTableContact/>
-            <RowTableContact/>
-        </tbody>
-      </table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Имя контакта</th>
+                    <th>Телефон</th>
+                    <th>E-mail</th>
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    props.contacts.map(
+                        contact => 
+                            (<RowTableContact
+                                id={contact.id}
+                                name={contact.name}
+                                phone={contact.phone}
+                                email={contact.email}
+                            />)
+                    )
+                }
+            </tbody>
+        </table>
     );
 }
 

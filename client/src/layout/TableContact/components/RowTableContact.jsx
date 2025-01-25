@@ -1,10 +1,10 @@
-const RowTableContact=()=>{
+const RowTableContact=(props)=>{
     return (
         <tr>
-            <th>1</th>
-            <th>fff</th>
-            <th>fff</th>
-            <th>fff</th>
+            <th>{props.id}</th>
+            <th>{props.name}</th>
+            <th>{props.phone}</th>
+            <th>{props.email}</th>
           </tr>
     );
 }
