@@ -1,7 +1,5 @@
 import RowTableContact from "./components/RowTableContact";
 
-
-
 const TableContact = (props) => {
     return (
 
