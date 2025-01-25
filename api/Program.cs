@@ -6,8 +6,14 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 //внедрение зависимостей, если нужно что-то на уровне всего приложения, то:
 builder.Services.AddSingleton<ContactStorage>();
+builder.Services.AddCors(opt => opt.AddPolicy(
+    "AllowAll", policy => policy
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .WithOrigins("http://localhost:3000")));
 var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.MapControllers();
+app.UseCors("AllowAll");
 app.Run();
