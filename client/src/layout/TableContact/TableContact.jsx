@@ -23,6 +23,7 @@ const TableContact = (props) => {
                                 name={contact.name}
                                 phone={contact.phone}
                                 email={contact.email}
+                                deleteContact={props.deleteContact}
                             />)
                     )
                 }

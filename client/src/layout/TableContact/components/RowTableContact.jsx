@@ -1,6 +1,6 @@
 const RowTableContact=(props)=>{
     return (
-        <tr>
+        <tr onClick={()=> {props.deleteContact(props.id)}}>
             <th>{props.id}</th>
             <th>{props.name}</th>
             <th>{props.phone}</th>
