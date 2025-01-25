@@ -3,9 +3,9 @@ import TableContact from "./layout/TableContact/TableContact";
 import { useState } from 'react';
 import axios from 'axios';
 
-
+const baseApiUrl = process.env.REACT_APP_API_URL;
 const App = () => {
-  const url = 'http://localhost:5000/api/ContactManagement/contacts'; 
+  const url = `${baseApiUrl}/contacts`; 
   axios.get(url).then(
     res=>console.log(res.data)
   );
