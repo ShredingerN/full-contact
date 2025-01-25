@@ -9,15 +9,15 @@ const FormContact = (props) => {
         let isValid = true;
         const newErrors = { name: '', phone: '', email: '' };
 
-        if (!contactName) {
+        if (!contactName.trim()) {
             newErrors.name = 'Имя обязательно для заполнения';
             isValid = false;
         }
-        if (!contactPhone) {
+        if (!contactPhone.trim()) {
             newErrors.phone = 'Телефон обязателен для заполнения';
             isValid = false;
         }
-        if (!contactEmail) {
+        if (!contactEmail.trim()) {
             newErrors.email = 'E-mail обязателен для заполнения';
             isValid = false;
         }

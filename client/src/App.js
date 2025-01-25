@@ -13,10 +13,11 @@ const App = () => {
     ]);
 
   const addContact = (contactName, contactPhone, contactEmail) => {
-    //компаратор
-    const newId = contacts
-      .sort((a, b) => a.id - b.id)[contacts.length - 1]
-      .id + 1;
+    const newId = contacts.length > 0 ? Math.max(...contacts.map(e => e.id)) + 1 : 1;
+    // //компаратор
+    // const newId = contacts
+    //   .sort((a, b) => a.id - b.id)[contacts.length - 1]
+    //   .id + 1;
     const item = {
       id: newId,
       name: contactName,
