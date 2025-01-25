@@ -2,6 +2,7 @@ import FormContact from "./layout/FormContact/FormContact";
 import TableContact from "./layout/TableContact/TableContact";
 import { useState } from 'react';
 
+
 const App = () => {
   const [contacts, setContacts] = useState(
     [
@@ -33,9 +34,10 @@ const App = () => {
         <div className="card-header">
           <h1>Список контактов</h1>
         </div>
+        
+        <div className="card-body">
         <TableContact contacts={contacts} />
         <FormContact addContact={addContact}/>
-        <div className="card-body">
         </div>
       </div>
     </div>
