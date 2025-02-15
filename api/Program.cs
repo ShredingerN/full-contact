@@ -17,14 +17,17 @@ builder.Services.AddSwaggerGen(
 //добавляет функционал для работы с контроллерами: сервис для обработки http-запросов, сервисы маршрутизации запросов к контроллерам и др.
 builder.Services.AddControllers();
 //внедрение зависимостей, если нужно что-то на уровне всего приложения, то:
-builder.Services.AddSingleton<ContactStorage>();
+var stringConnection = builder.Configuration.GetConnectionString("SqliteStringConnection");
+builder.Services.AddSingleton<IStorage>(new SqliteStorage(stringConnection));
+
 //args[0] - означает, что теперь url передаем при запуске приложения
 builder.Services.AddCors(opt => opt.AddPolicy(
     "AllowAll", policy =>
     {
         policy.AllowAnyMethod()
         .AllowAnyHeader()
-        .WithOrigins(args[0]);
+        // добавили урл в настройки appsetings.Development.json
+        .WithOrigins(builder.Configuration["client"]);
     }));
 var app = builder.Build();
 app.UseSwagger();

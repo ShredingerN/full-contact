@@ -20,8 +20,11 @@
 mono_crash.*
 
 ##
+# файл используется для конфигурации приложения в дебажном режиме
+# в релизной версии будет использоваться appsettings.json
 appsettings.Development.json
 appsettings.json
+
 
 
 # Build results
