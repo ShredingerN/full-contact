@@ -2,19 +2,22 @@ import FormContact from "./layout/FormContact/FormContact";
 import TableContact from "./layout/TableContact/TableContact";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Route } from "react-router-dom";
+import { Routes, Route, useLocation } from'react-router-dom';
+import ContactDetails from "./layout/ContactDetails/ContactDetails";
 
 const baseApiUrl = process.env.REACT_APP_API_URL;
 const App = () => {
   const [contacts, setContacts] = useState([]);
+  const location = useLocation();
 
 
-  const url = `${baseApiUrl}/contacts`;
+  
   useEffect(() => {
+    const url = `${baseApiUrl}/contacts`;
     axios.get(url).then(
       res => setContacts(res.data)
     );
-  }, []);
+  }, [location.pathname]);
 
   const addContact = (contactName, contactPhone, contactEmail) => {
 
@@ -26,16 +29,9 @@ const App = () => {
     const url = `${baseApiUrl}/contacts`;
     axios.post(url, item).then(
       response => setContacts([...contacts, response.data])
-    );
-    ;
+    )
+    
   };
-
-  const deleteContact = (id) => {
-    const url = `${baseApiUrl}/contacts/${id}`;
-    axios.delete(url);
-    setContacts(contacts.filter(item => item.id !== id));
-  };
-
 
   return (
     <div className="container mt-5" >
@@ -48,12 +44,12 @@ const App = () => {
             <div className="card-body">
               <TableContact
                 contacts={contacts}
-                deleteContact={deleteContact} />
+                />
               <FormContact addContact={addContact} />
             </div>
           </div>
         }/>
-        <Route path="contact/:id" element={<h1>Page not found</h1>}/>
+        <Route path="contact/:id" element={<ContactDetails/>}/>
       </Routes>
     </div>
 
