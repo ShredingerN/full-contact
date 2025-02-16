@@ -15,8 +15,8 @@ public class ContactManagementController : BaseController
     [HttpPost("contacts")]
     public IActionResult Create([FromBody] Contact contact)
     {
-        bool res = storage.Add(contact);
-        if (res) return Created($"/contacts/{contact.Id}", contact);
+        Contact res = storage.Add(contact);
+        if (res!=null)return Created($"/contacts/{contact.Id}", contact);
         return Conflict($"Контакт уже существует");
     }
 
@@ -33,14 +33,14 @@ public class ContactManagementController : BaseController
     /// Получить контакт по идентификатору
     /// </summary>
     [HttpGet("contacts/{id}")]
-    public IActionResult SearchContact(int id)
+    public IActionResult GetContactById(int id)
     {
         if (id < 0)
         {
             return BadRequest("Неверный формат идентификатора контакта");
         }
 
-        Contact res = storage.SearchContact(id);
+        Contact res = storage.GetContactById(id);
         if (res != null) return Ok(res);
         return NotFound($"Контакт {id} не найден");
     }

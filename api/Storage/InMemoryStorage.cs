@@ -1,5 +1,7 @@
 using Bogus;
-public class InMemoryStorage: IStorage
+
+//хранение данных в памяти, в списке без базы данных
+public class InMemoryStorage : IStorage
 {
     private List<Contact> Contacts { get; set; }
     public InMemoryStorage()
@@ -20,17 +22,16 @@ public class InMemoryStorage: IStorage
         }
     }
 
-    public bool Add(Contact contact)
+    public Contact Add(Contact contact)
     {
         if (Contacts.Any(
             item => item.Id == contact.Id))
         {
-            return false;
+            return null;
         }
         Contacts.Add(contact);
-        return true;
+        return contact;
     }
-
     public List<Contact> GetContacts()
     {
         return Contacts;
@@ -78,7 +79,7 @@ public class InMemoryStorage: IStorage
         return false;
     }
 
-    public Contact SearchContact(int id)
+    public Contact GetContactById(int id)
     {
         return Contacts.FirstOrDefault(
             item => item.Id == id);

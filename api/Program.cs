@@ -1,35 +1,11 @@
-using Microsoft.OpenApi.Models;
-using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddServiceCollection(builder.Configuration);
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(
-    c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 
-    // Укажите путь к сгенерированному XML-файлу с комментариями
-    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    c.IncludeXmlComments(xmlPath);
-}
-);
-//добавляет функционал для работы с контроллерами: сервис для обработки http-запросов, сервисы маршрутизации запросов к контроллерам и др.
-builder.Services.AddControllers();
-//внедрение зависимостей, если нужно что-то на уровне всего приложения, то:
-var stringConnection = builder.Configuration.GetConnectionString("SqliteStringConnection");
-builder.Services.AddSingleton<IStorage>(new SqliteStorage(stringConnection));
-
-//args[0] - означает, что теперь url передаем при запуске приложения
-builder.Services.AddCors(opt => opt.AddPolicy(
-    "AllowAll", policy =>
-    {
-        policy.AllowAnyMethod()
-        .AllowAnyHeader()
-        // добавили урл в настройки appsetings.Development.json
-        .WithOrigins(builder.Configuration["client"]);
-    }));
 var app = builder.Build();
+app.Services.AddCustomerService(builder.Configuration);
+
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
