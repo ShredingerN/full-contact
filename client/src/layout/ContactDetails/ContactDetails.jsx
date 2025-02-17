@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 const baseApiUrl = process.env.REACT_APP_API_URL;
 
-const ContactDetails = () => {
+const ContactDetails = (props) => {
     const [contact, setContact] = useState({ name: "", email: "", phone: "", });
     const { id } = useParams();
     const navigate = useNavigate();
@@ -22,8 +22,10 @@ const ContactDetails = () => {
     const handleDelete = () => {
         const url = `${baseApiUrl}/contacts/${id}`;
         if (window.confirm("Точно грохаем?")) {
-            axios.delete(url).then(
-                navigate('/')
+            axios.delete(url).then(() => {
+                props.onUpdate();
+                navigate('/');
+            }
             ).catch(
                 console.log("Ошибка удаления")
             )
@@ -32,8 +34,10 @@ const ContactDetails = () => {
 
     const handleUpdate = () => {
         const url = `${baseApiUrl}/contacts/${id}`;
-        axios.put(url, contact).then(
-            navigate('/') // Перенаправление на страницу со списком контактов
+        axios.put(url, contact).then(() => {
+            props.onUpdate();
+            navigate('/');
+        } 
         ).catch(
             console.log("Ошибка обновления")
         )
