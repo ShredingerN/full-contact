@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 
 public class ContactManagementController : BaseController
 {
-    private IStorage storage;
+    private IPaginationStorage storage;
 
-    public ContactManagementController(IStorage storage)
+    public ContactManagementController(IPaginationStorage storage)
     {
         this.storage = storage;
     }
@@ -16,7 +16,7 @@ public class ContactManagementController : BaseController
     public IActionResult Create([FromBody] Contact contact)
     {
         Contact res = storage.Add(contact);
-        if (res!=null)return Created($"/contacts/{contact.Id}", contact);
+        if (res != null) return Created($"/contacts/{contact.Id}", contact);
         return Conflict($"Контакт уже существует");
     }
 
@@ -67,6 +67,24 @@ public class ContactManagementController : BaseController
         return BadRequest($"Такого id {id} не существует");
 
     }
+
+     /// <summary>
+    /// Получение контактов по страницам(пагинация)
+    /// </summary>
+    [HttpGet("contacts/page")]
+    public IActionResult GetContacts(int pageNumber=1, int pageSize=5)
+    {
+        var (contacts, total) = storage.GetContacts(pageNumber,  pageSize);
+        var response = new
+        {
+            Contacts = contacts,
+            TotalCount = total,
+            CurrentPage = pageNumber,
+            PageSize = pageSize
+        };
+        return Ok(response);
+    }
+
 
 }
 

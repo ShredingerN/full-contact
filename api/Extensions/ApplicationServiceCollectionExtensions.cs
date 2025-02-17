@@ -25,7 +25,7 @@ public static class ApplicationServiceCollectionExtensions
         var stringConnection = configuration.GetConnectionString("SqliteStringConnection");
         //настройка для базки без ef core
         // services.AddSingleton<IStorage>(new SqliteStorage(stringConnection));
-        services.AddScoped<IStorage, SqliteEfStorage>();
+        services.AddScoped<IPaginationStorage, SqliteEfPaginationStorage>();
         services.AddDbContext<SqliteDbContext>(opt => opt.UseSqlite(stringConnection));
         services.AddScoped<IInitializer, SqliteEfFakerInitializer>();
                 //args[0] - означает, что теперь url передаем при запуске приложения
