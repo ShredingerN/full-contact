@@ -8,8 +8,8 @@ const TableContact = (props) => {
                 <tr>
                     <th></th>
                     <th>Имя контакта</th>
-                    <th>Телефон</th>
-                    <th>E-mail</th>
+                    <th className="d-none d-md-table-cell">Телефон</th>
+                    <th className="d-none d-md-table-cell">E-mail</th>
                     <th></th>
                 </tr>
             </thead>
