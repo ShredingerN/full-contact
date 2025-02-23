@@ -7,16 +7,19 @@ public class ConfigMiddleware
     {
         this.next = next;
     }
+
     public async Task InvokeAsync(HttpContext context)
     {
-        if (context.Request.Path == "config.js")
+        if (context.Request.Path == "/config.js")
         {
             var scheme = context.Request.Scheme;
             var host = context.Request.Host.Value;
-            var pathBase = context.Request.Path.Value;
+            var pathBase = context.Request.PathBase.Value;
 
-            var apiUrl = $"{scheme}://{host}:{pathBase}/api/ContactManager";
-            var config = $@"window.config={{apiUrl: '{apiUrl}'}}";
+            var apiUrl = $"{scheme}://{host}{pathBase}/api/ContactManagement";
+
+            var config = $@"window.config={{apiUrl: '{apiUrl}'}};";
+
             context.Response.ContentType = "application/javascript";
             await context.Response.WriteAsync(config);
 
