@@ -33,13 +33,6 @@ const App = () => {
     );
   }, [currentPage, pageSize, location.pathname]);
 
-  useEffect(() => {
-    const url = `${baseApiUrl}/contacts`;
-    axios.get(url).then(
-      res => setContacts(res.data)
-    );
-  }, [location.pathname]);
-
   const addContact = (contactName, contactPhone, contactEmail) => {
 
     const item = {
