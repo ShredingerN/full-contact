@@ -12,7 +12,7 @@ const App = () => {
   const location = useLocation();
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const [pageSize] = useState(5);
+  const [pageSize] = useState(10);
   const [updateTrigger, setUpdateTrigger] = useState(0);
 
   const handleUpdateTrigger =()=>{

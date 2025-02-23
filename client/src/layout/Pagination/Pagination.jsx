@@ -1,7 +1,7 @@
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
     const pageNumber = [];
     let startPage, endPage;
-    const countPagination = 4;
+    const countPagination = 10;
 
     if (totalPages <= countPagination) {
         startPage = 1;
@@ -24,9 +24,9 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
     }
 
     return (
-        <nav aria-label="...">
-            <ul class="pagination">
-                <li class={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+        <nav>
+            <ul className="pagination">
+                <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
                     <button
                         className="page-link"
                         onClick={() => { onPageChange(currentPage - 1); }}
@@ -66,7 +66,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
                 {endPage < totalPages && (
                     <>
                         {endPage < totalPages - 1 &&
-                            <li class="page-item disabled  ">
+                            <li className="page-item disabled">
                                 <span className="page-link">...</span>
                             </li>}
                         <li
@@ -80,7 +80,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
                     </>
                 )}
 
-                <li class={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
+                <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
                     <button
                         className="page-link"
                         onClick={() => { onPageChange(currentPage + 1); }}
@@ -92,6 +92,6 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
         </nav>
     );
-};
+}
 
 export default Pagination;
