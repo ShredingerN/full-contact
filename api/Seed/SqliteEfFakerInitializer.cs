@@ -20,7 +20,7 @@ public class SqliteEfFakerInitializer : IInitializer
             .RuleFor(c => c.Email, f => f.Internet.Email())
             .RuleFor(c => c.Phone, f => f.Phone.PhoneNumber("7-###-###-####"));
 
-            var contacts = faker.Generate(2000);
+            var contacts = faker.Generate(200);
             context.Contacts.AddRange(contacts);
             context.SaveChanges();
         }
